@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shoping/utils/AppConstant.dart';
+
+import '../auth-ui/welcome-screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -15,6 +20,14 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColour,
         title: Center(child: Text(AppConstant.appMainName)),
+        actions: [
+          GestureDetector(
+              onTap: ()async{
+                GoogleSignIn googleSignIn = GoogleSignIn();
+              await  googleSignIn.signOut();
+                Get.offAll(()=>WecomeScreen());
+              },
+              child: Icon(Icons.logout))],
       ),
     );
   }

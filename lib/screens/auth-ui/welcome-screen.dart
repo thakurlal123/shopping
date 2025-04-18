@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shoping/utils/AppConstant.dart';
 
+import '../../controllers/google-sign-in-controller.dart';
+
 class WecomeScreen extends StatefulWidget {
   const WecomeScreen({super.key});
 
@@ -11,6 +13,9 @@ class WecomeScreen extends StatefulWidget {
 }
 
 class _WecomeScreenState extends State<WecomeScreen> {
+
+  final GoogleSignInController _googleSignInController = Get.put(GoogleSignInController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,10 +42,12 @@ class _WecomeScreenState extends State<WecomeScreen> {
               ),
               width: Get.width/1.2,
               height: Get.height/12,
-              
+
               child: TextButton.icon(
                   icon: Icon(Icons.g_mobiledata_outlined,color: Colors.yellowAccent,),
-                  onPressed: (){}, label: Text("Sing in with google",style: TextStyle(color: AppConstant.appTextColour),)),
+                  onPressed: (){
+                    _googleSignInController.signInWithGoogle();
+                  }, label: Text("Sing in with google",style: TextStyle(color: AppConstant.appTextColour),)),
             ),),
             SizedBox(height: Get.height/40,),
             Material(child: Container(
