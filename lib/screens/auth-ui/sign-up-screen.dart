@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:shoping/controllers/get-device-token.dart';
 import 'package:shoping/controllers/sign-up-controller.dart';
 import 'package:shoping/screens/auth-ui/sign-in-screen.dart';
 
@@ -17,11 +18,16 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final SignUpController signUpController = Get.put(SignUpController());
+  final GetDeviceTokenController getDeviceTokenController = Get.put(GetDeviceTokenController());
   TextEditingController userName = TextEditingController();
   TextEditingController userEmail = TextEditingController();
   TextEditingController userPhone = TextEditingController();
   TextEditingController userCity = TextEditingController();
   TextEditingController password = TextEditingController();
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(
@@ -140,8 +146,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           String phone = userPhone.text.trim();
                           String city = userCity.text.trim();
                           String passwo = password.text.trim();
-                          String userDeviceToken = '';
-                          if(name.isEmpty|| email.isEmpty|| phone.isEmpty||city.isEmpty||passwo.isEmpty){
+                          String? userDeviceToken = getDeviceTokenController.deviceToken?.trim().toString();
+                          if(name.isEmpty|| email.isEmpty|| phone.isEmpty||city.isEmpty||passwo.isEmpty)
+                          {
                             Get.snackbar("Error", "Please Enter All Details",
                                 snackPosition: SnackPosition.BOTTOM,
                                 backgroundColor: AppConstant.appSecendoryColour,
@@ -149,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                             );
                           }else{
-                            UserCredential? userCreadential =await signUpController.signUpMethod(name, email, phone, city, passwo, userDeviceToken);
+                            UserCredential? userCreadential =await signUpController.signUpMethod(name, email, phone, city, passwo, userDeviceToken!);
                             if(userCreadential!=null){
                               Get.snackbar("Varification Email sent", "Please check yur email",
                                   snackPosition: SnackPosition.BOTTOM,
