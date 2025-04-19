@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:shoping/screens/auth-ui/sign-in-screen.dart';
+import 'package:shoping/screens/auth-ui/sign-up-screen.dart';
 import 'package:shoping/utils/AppConstant.dart';
 
 import '../../controllers/google-sign-in-controller.dart';
@@ -60,7 +62,10 @@ class _WecomeScreenState extends State<WecomeScreen> {
 
               child: TextButton.icon(
                   icon: Icon(Icons.email,color: Colors.yellowAccent,),
-                  onPressed: (){}, label: Text("Sing in with Email",style: TextStyle(color: AppConstant.appTextColour),)),
+                  onPressed: (){
+                  Get.to(()=>SignInScreen());
+                  },
+                  label: Text("Sing in with Email",style: TextStyle(color: AppConstant.appTextColour),)),
             ),)
 
 
