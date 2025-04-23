@@ -53,7 +53,7 @@ class _SplaceScreenState extends State<SplaceScreen> {
       backgroundColor: AppConstant.appMainColour,
       body: Container(
         child: Center(
-         // child:Lottie.asset(name)
+          // child:Lottie.asset(name)
           child: Text("Splace Screen",style: TextStyle(color: Colors.white),),
         ),
       ),

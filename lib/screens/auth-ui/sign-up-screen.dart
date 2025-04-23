@@ -91,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: TextFormField(
                         controller: userCity,
                         cursorColor: AppConstant.appMainColour,
-                       // keyboardType: TextInputType.number,
+                        // keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                             hintText: "City",
                             prefixIcon: Icon(Icons.location_pin),
@@ -119,7 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))
                         ),
                       ))
-                  
+
                   ),
                   SizedBox(height: Get.height/50,),
                   Container(

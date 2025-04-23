@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shoping/utils/AppConstant.dart';
 
+import '../../widgets/custom-drewer-widget.dart';
 import '../auth-ui/welcome-screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -19,19 +20,12 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: AppConstant.appTextColour),
         backgroundColor: AppConstant.appMainColour,
-        title: Center(child: Text(AppConstant.appMainName)),
-        actions: [
-          GestureDetector(
-              onTap: ()async{
-                GoogleSignIn googleSignIn = GoogleSignIn();
-                FirebaseAuth _auth = FirebaseAuth.instance;
-                await _auth.signOut();
-              await  googleSignIn.signOut();
-                Get.offAll(()=>WecomeScreen());
-              },
-              child: Icon(Icons.logout))],
+        title: Center(child: Text(AppConstant.appMainName,style: TextStyle(color: AppConstant.appTextColour),)),
+
       ),
+      drawer: DrawerWidget(),
     );
   }
 }
