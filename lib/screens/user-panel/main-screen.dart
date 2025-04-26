@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shoping/screens/user-panel/all-categories-screen.dart';
 import 'package:shoping/utils/AppConstant.dart';
 
+import '../../widgets/all-products-widget.dart';
 import '../../widgets/banner-widget.dart';
+import '../../widgets/catedory-widget.dart';
 import '../../widgets/custom-drewer-widget.dart';
+import '../../widgets/flash-sale-widget.dart';
 import '../../widgets/heading-widget.dart';
 import '../auth-ui/welcome-screen.dart';
+import 'all-flash-sale-products.dart';
+import 'all-products.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -40,17 +46,32 @@ class _MainScreenState extends State<MainScreen> {
             HeadingWidget(
               headingTittle: 'Categories',
               headingSubTittle: 'Low Budget',
-              onTap: (){},
+              onTap: (){
+                Get.to(()=>AllCategoriesScreen());
+              },
               buttonText: 'See More >',
 
             ),
+            CategoryWidget(),
             HeadingWidget(
-              headingTittle: 'Flash Sale',
-              headingSubTittle: 'Accourding to your Budget',
-              onTap: (){},
+              headingTittle: 'Flash sale',
+              headingSubTittle: 'Low Budget',
+              onTap: (){
+                Get.to(()=>AllFlashSaleProducts());
+              },
+              buttonText: 'See More >',
+            ),
+            FlashSaleWidget(),
+            HeadingWidget(
+              headingTittle: 'All Products',
+              headingSubTittle: 'Accourding to your budget',
+              onTap: (){
+                Get.to(()=>AllProduct());
+              },
               buttonText: 'See More >',
 
             ),
+            AllProductWidget()
           ],
         ),),
       ),

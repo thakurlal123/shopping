@@ -43,3 +43,4 @@ class MyApp extends StatelessWidget {
 //14 done
 //18 done
 //20 done
+//26 done and 27 at 3:10
