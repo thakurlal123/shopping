@@ -79,7 +79,7 @@ class _AllProductState extends State<AllProduct> {
                   return  Row(children: [
                     GestureDetector(
                       onTap: (){
-                          Get.to(()=>ProductDetailScreen(profuctModel: productModel,));
+                          Get.to(()=>ProductDetailScreen(productModel: productModel,));
                       },
                       child: Padding(padding: EdgeInsets.all(5.0),
                         child: Container(

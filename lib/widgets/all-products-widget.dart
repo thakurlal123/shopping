@@ -68,7 +68,7 @@ class AllProductWidget extends StatelessWidget {
                 return  Row(children: [
                   GestureDetector(
                     onTap: (){
-                      Get.to(()=>ProductDetailScreen(profuctModel: productModel,));
+                      Get.to(()=>ProductDetailScreen(productModel: productModel,));
                       //  Get.to(()=>SngleCategoryScreen(categoryId: productModel.productName,));
                     },
                     child: Padding(padding: EdgeInsets.all(5.0),

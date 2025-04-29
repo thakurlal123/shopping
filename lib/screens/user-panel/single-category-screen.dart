@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_card/image_card.dart';
+import 'package:shoping/screens/user-panel/product-detail-screen.dart';
 
 import '../../models/categories-model.dart';
 import '../../models/product-model.dart';
@@ -77,23 +78,28 @@ class _SngleCategoryScreenState extends State<SngleCategoryScreen> {
                   // );
                   return  Row(children: [
                     Padding(padding: EdgeInsets.all(5.0),
-                      child: Container(
-                        child: FillImageCard(
-                          borderRadius: 20.0,
-                          width: Get.width/2.2,
-                          heightImage: Get.height/10.0,
-                          imageProvider: CachedNetworkImageProvider(productModel.productImages[0],),
+                      child: InkWell(
+                        onTap: (){
+                          Get.to(()=>ProductDetailScreen(productModel: productModel,));
+                        },
+                        child: Container(
+                          child: FillImageCard(
+                            borderRadius: 20.0,
+                            width: Get.width/2.2,
+                            heightImage: Get.height/10.0,
+                            imageProvider: CachedNetworkImageProvider(productModel.productImages[0],),
 
-                          title: Center(child: Text(productModel.productName,style: TextStyle(fontSize: 12.0,overflow: TextOverflow.ellipsis),)),
-                          footer: Row(
-                            children: [
-                              Text("Rs ${productModel.salePrice}",style: TextStyle(fontSize: 10),),
-                              SizedBox(width: 2.0,),
-                              Text("${productModel.fullPrice}",style: TextStyle(color:AppConstant.appSecendoryColour,fontSize: 9,decoration: TextDecoration.lineThrough,overflow: TextOverflow.ellipsis),),
+                            title: Center(child: Text(productModel.productName,style: TextStyle(fontSize: 12.0,overflow: TextOverflow.ellipsis),)),
+                            footer: Row(
+                              children: [
+                                Text("Rs ${productModel.salePrice}",style: TextStyle(fontSize: 10),),
+                                SizedBox(width: 2.0,),
+                                Text("${productModel.fullPrice}",style: TextStyle(color:AppConstant.appSecendoryColour,fontSize: 9,decoration: TextDecoration.lineThrough,overflow: TextOverflow.ellipsis),),
 
-                            ],),
-                          //description: Text("data"),
-                          //footer: Text("data"),
+                              ],),
+                            //description: Text("data"),
+                            //footer: Text("data"),
+                          ),
                         ),
                       ),
                     )

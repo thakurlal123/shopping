@@ -15,6 +15,7 @@ import '../../widgets/heading-widget.dart';
 import '../auth-ui/welcome-screen.dart';
 import 'all-flash-sale-products.dart';
 import 'all-products.dart';
+import 'cart-screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -31,7 +32,16 @@ class _MainScreenState extends State<MainScreen> {
         iconTheme: IconThemeData(color: AppConstant.appTextColour),
         backgroundColor: AppConstant.appMainColour,
         title: Center(child: Text(AppConstant.appMainName,style: TextStyle(color: AppConstant.appTextColour),)),
-
+actions: [
+  GestureDetector(
+      onTap: (){
+        Get.to(()=>CartScreen());
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Icon(Icons.shopping_cart),
+      ))
+],
       ),
       drawer: DrawerWidget(),
       body: SingleChildScrollView(

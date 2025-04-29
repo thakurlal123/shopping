@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_card/image_card.dart';
+import 'package:shoping/screens/user-panel/product-detail-screen.dart';
 import 'package:shoping/screens/user-panel/single-category-screen.dart';
 
 import '../../models/categories-model.dart';
@@ -78,7 +79,7 @@ class _AllFlashSaleProductsState extends State<AllFlashSaleProducts> {
                   return  Row(children: [
                     GestureDetector(
                       onTap: (){
-                      //  Get.to(()=>SngleCategoryScreen(categoryId: productModel.productName,));
+                        Get.to(()=>ProductDetailScreen(productModel: productModel,));
                       },
                       child: Padding(padding: EdgeInsets.all(5.0),
                         child: Container(
