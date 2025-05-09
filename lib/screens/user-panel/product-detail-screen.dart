@@ -11,6 +11,8 @@ import 'package:shoping/models/cart-model.dart';
 import 'package:shoping/models/product-model.dart';
 import 'package:shoping/utils/AppConstant.dart';
 
+import 'cart-screen.dart';
+
 class ProductDetailScreen extends StatefulWidget {
   final ProductModel? productModel;
    ProductDetailScreen({super.key, required this.productModel});
@@ -27,6 +29,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return Scaffold(
       appBar: AppBar(backgroundColor: AppConstant.appMainColour,
       title: Text("Product Details",style: TextStyle(color: AppConstant.appTextColour),),
+        actions: [
+          GestureDetector(
+              onTap: (){
+                Get.to(()=>CartScreen());
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.shopping_cart,color: AppConstant.appTextColour,),
+              ))
+        ],
       ),
       body: Container(
         child:Column(
@@ -159,7 +171,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       int currentQuantity = snapshot['productQuantity'];
       int updatedQuantity = currentQuantity+ quantityIncreament;
 
-      double totalPrice = double.parse(widget.productModel!.fullPrice)*updatedQuantity;
+      double totalPrice = double.parse(widget.productModel!.isSale?widget.productModel!.salePrice: widget.productModel!.fullPrice)*updatedQuantity;
 
       await documentReference.update({
         'productQuantity':updatedQuantity,
@@ -185,7 +197,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           productQuantity: 1,
-          productTotalPrice:double.parse(widget.productModel!.fullPrice));
+          productTotalPrice:double.parse(widget.productModel!.isSale?widget.productModel!.salePrice: widget.productModel!.fullPrice));
       await documentReference.set(cartModel.toMap());
     }
     print("Product added");
