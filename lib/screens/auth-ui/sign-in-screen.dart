@@ -112,8 +112,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               backgroundColor: AppConstant.appSecendoryColour,
                               colorText: AppConstant.appTextColour);
                         }else{
-                          UserCredential? userCreadential
-                          = await signInController.signInMethod(email, password);
+                          UserCredential? userCreadential = await signInController.signInMethod(email, password);
 
                           var userData = await getUserDataController.getUserData(userCreadential!.user!.uid);
 
@@ -142,7 +141,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                   backgroundColor: AppConstant.appSecendoryColour,
                                   colorText: AppConstant.appTextColour);
                             }
-                          }else{
+                          }
+                          else{
                             Get.snackbar("Error", "Please try again",
                                 snackPosition: SnackPosition.BOTTOM,
                                 backgroundColor: AppConstant.appSecendoryColour,

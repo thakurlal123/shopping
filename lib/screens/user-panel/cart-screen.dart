@@ -9,6 +9,7 @@ import 'package:shoping/controllers/cart-price-controller.dart';
 import 'package:shoping/utils/AppConstant.dart';
 
 import '../../models/cart-model.dart';
+import 'checkout-screen.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -202,7 +203,9 @@ final  productPriceController =Get.put(ProductPriceController());
                 height: Get.height/20,
 
                 child: TextButton.icon(
-                    onPressed: (){}, label: Text("checkout",style: TextStyle(fontWeight: FontWeight.bold,color: AppConstant.appTextColour),)),
+                    onPressed: (){
+                      Get.to(()=>CheckOutScreen());
+                    }, label: Text("checkout",style: TextStyle(fontWeight: FontWeight.bold,color: AppConstant.appTextColour),)),
               ),),
             ],
           ),
