@@ -29,12 +29,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: AppConstant.appTextColour),
         backgroundColor: AppConstant.appMainColour,
-        title: Text("Cart Screen"),
+        title: Text("CheckOut",
+            style: TextStyle(color: AppConstant.appTextColour),),
       ),
       body:
       StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('cart').doc(user?.uid).collection('cartOrder').snapshots(),
+          stream: FirebaseFirestore.instance.collection('cart').doc(user?.uid).collection('cartOrders').snapshots(),
           builder: (BuildContext context,AsyncSnapshot<QuerySnapshot>snapshot){
             if(snapshot.hasError){
               return Center(child: Text("Error"),);
@@ -228,7 +230,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                          customerName:name,
                          customerPhone:phone,
                          cutomerAddress:address,
-                         customerDeviceToken:customerToken
+                         customerDeviceToken:customerToken!
                        );
 
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shoping/screens/user-panel/all-orders-screen.dart';
 import 'package:shoping/utils/AppConstant.dart';
 
 import '../screens/auth-ui/welcome-screen.dart';
@@ -72,6 +73,11 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 title: Text("Orders",style: TextStyle(color: AppConstant.appTextColour),),
                 leading: Icon(Icons.shopping_bag,color: AppConstant.appTextColour),
                 trailing: Icon(Icons.arrow_forward,color: AppConstant.appTextColour),
+
+                onTap: (){
+                  Get.back();
+                  Get.to(AllOrdersScreen());
+                },
               ),
             ),
             Padding(

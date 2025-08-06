@@ -1,19 +1,88 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:shoping/models/order-model.dart';
+import 'package:shoping/screens/user-panel/main-screen.dart';
+import 'package:shoping/services/generate-order-id-service.dart';
+import 'package:shoping/utils/AppConstant.dart';
 
 Future<void> placeOrder({
   required BuildContext context,
   required String customerPhone,
   required String customerName,
   required String cutomerAddress,
-  String? customerDeviceToken
+  required String customerDeviceToken
 }) async {
 final user = FirebaseAuth.instance.currentUser;
+EasyLoading.show(status:"Please wait ..." );
 if(user!=null){
   try{
-QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('cart').doc(user!.uid).collection('cartOrder').get();
+QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('cart').doc(user!.uid).collection('cartOrders').get();
 
+List<QueryDocumentSnapshot> documents = querySnapshot.docs;
+ for(var doc in documents){
+Map<String,dynamic>?data = doc.data() as Map<String,dynamic>;
+
+String orderId = generateOrderId();
+
+OrderModel cartModel = OrderModel(
+    productId: data['productId'],
+    categoryId: data['categoryId'],
+    productName: data['productName'],
+    categoryName: data['categoryName'],
+    salePrice: data['salePrice'],
+    fullPrice: data['fullPrice'],
+    productImages: data['productImages'],
+    deliveryTime: data['deliveryTime'],
+    isSale: data['isSale'],
+    productDescription: data['productDescription'],
+    createdAt: DateTime.now(),
+    updatedAt: data['updatedAt'],
+    productQuantity: data['productQuantity'],
+    productTotalPrice:data['productTotalPrice'],
+    customerId: user.uid,
+    status: false,
+    customerName: customerName,
+    customerPhone: customerPhone,
+    customerAddress: cutomerAddress,
+    customerDeviceToken: customerDeviceToken,
+);
+
+for(var x =0;x<documents.length;x++){
+  await FirebaseFirestore.instance.collection('orders').doc(user.uid).set({
+
+    'uId':user.uid,
+    'customerName':customerName,
+    'customerPhone':customerPhone,
+    'customerAddress':cutomerAddress,
+    'customerDeviceToken':customerDeviceToken,
+    'orderStatus':false,
+    'createdAt':DateTime.now()
+
+
+
+  });
+  //upload order
+  await FirebaseFirestore.instance.collection('orders').doc(user.uid).collection('confirmOrders').doc(orderId).set(cartModel.toMap());
+
+  //delete cart product
+  FirebaseFirestore.instance.collection('cart').doc(user.uid).collection('cartOrders').doc(cartModel
+      .productId.toString()).delete().then((value){
+        print('delete cart product');
+  });
+}
+ }
+print('conferm cart product');
+ Get.snackbar("order Confermed","Thanks for order",
+     backgroundColor: AppConstant.appMainColour,
+     colorText: AppConstant.appTextColour,
+ duration: Duration(seconds: 5));
+
+ EasyLoading.dismiss();
+ Get.offAll(()=>MainScreen());
   }catch(e){
     print("Error $e");
   }

@@ -33,7 +33,7 @@ class _SplaceScreenState extends State<SplaceScreen> {
 
   Future<void>loggdin(BuildContext context)async{
 
-    if(user!=null){
+    if(user!=null){ 
       final GetUserDataController getUserDataController= Get.put(GetUserDataController());
       var userData = await getUserDataController.getUserData(user!.uid);
       if(userData[0]['isAdmin']==true){

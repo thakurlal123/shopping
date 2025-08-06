@@ -25,12 +25,13 @@ final  productPriceController =Get.put(ProductPriceController());
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: AppConstant.appTextColour),
         backgroundColor: AppConstant.appMainColour,
-        title: Text("Cart Screen"),
+        title: Text("Cart Screen",style: TextStyle(color: AppConstant.appTextColour),),
       ),
       body:
       StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('cart').doc(user?.uid).collection('cartOrder').snapshots(),
+          stream: FirebaseFirestore.instance.collection('cart').doc(user?.uid).collection('cartOrders').snapshots(),
           builder: (BuildContext context,AsyncSnapshot<QuerySnapshot>snapshot){
             if(snapshot.hasError){
               return Center(child: Text("Error"),);
@@ -82,7 +83,7 @@ final  productPriceController =Get.put(ProductPriceController());
                                     .instance
                                     .collection('cart')
                                     .doc(user!.uid)
-                                    .collection('cartOrder')
+                                    .collection('cartOrders')
                                     .doc(cartModel.productId).delete();
 
                               })],
@@ -106,7 +107,7 @@ final  productPriceController =Get.put(ProductPriceController());
                                         if(cartModel.productQuantity>0){
                                           await FirebaseFirestore.instance
                                               .collection('cart').doc(user!.uid)
-                                              .collection('cartOrder').doc(cartModel.productId).update({
+                                              .collection('cartOrders').doc(cartModel.productId).update({
                                             'productQuantity':cartModel.productQuantity+1,
                                             'productTotalPrice':(
                                               //  double.parse(cartModel.fullPrice)+
@@ -128,7 +129,7 @@ final  productPriceController =Get.put(ProductPriceController());
                                         if(cartModel.productQuantity>1){
                                           await FirebaseFirestore.instance
                                               .collection('cart').doc(user!.uid)
-                                              .collection('cartOrder').doc(cartModel.productId).update({
+                                              .collection('cartOrders').doc(cartModel.productId).update({
                                             'productQuantity':cartModel.productQuantity-1,
                                             'productTotalPrice':(double.parse(cartModel.isSale?cartModel.salePrice:cartModel.fullPrice)*(cartModel.productQuantity-1)),
                                           });
@@ -149,40 +150,6 @@ final  productPriceController =Get.put(ProductPriceController());
               );
 
           }),
-//       Container(
-//         child: ListView.builder(
-//           itemCount: 20 ,
-//             shrinkWrap: true,
-//             itemBuilder: (context,index){
-//           return Card(
-//             elevation: 2,
-//             color: AppConstant.appTextColour,
-//             child: ListTile(
-//               leading: CircleAvatar(
-//                 backgroundColor: AppConstant.appMainColour,
-//                 child: Text("T"),),
-//               title: Text("New Dress for women"),
-//               subtitle: Row(
-// mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   Text("2200"),
-//                  Row(children: [
-//                    CircleAvatar(
-//                      radius: 14,
-//                      backgroundColor: AppConstant.appMainColour,
-//                      child: Text("+"),),
-//                    SizedBox(width:Get.width/20.0),
-//                    CircleAvatar(
-//                      radius: 14,
-//                      backgroundColor: AppConstant.appMainColour,
-//                      child: Text("-"),),
-//                  ],)
-//                 ],
-//               ),
-//             ),
-//           );
-//         })
-//       ),
       bottomNavigationBar: Container(
         margin: EdgeInsets.only(bottom: 5),
         child: Padding(

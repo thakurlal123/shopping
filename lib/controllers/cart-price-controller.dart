@@ -16,7 +16,7 @@ class ProductPriceController extends GetxController{
     final QuerySnapshot<Map<String,dynamic>>snapshot = await FirebaseFirestore
             .instance
         .collection('cart')
-        .doc(user!.uid).collection('cartOrder').get();
+        .doc(user!.uid).collection('cartOrders').get();
 
     double sum = 0.0;
 
